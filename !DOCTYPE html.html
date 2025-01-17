@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Personalidade</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #555;
+    }
+    .question {
+      margin: 20px 0;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Teste de Personalidade</h1>
+  <form id="quizForm">
+    <div class="question">
+      <p><strong>1. O que você prefere fazer em um dia de folga?</strong></p>
+      <label><input type="radio" name="q1" value="a"> Explorar um lugar novo ou começar um hobby diferente.</label><br>
+      <label><input type="radio" name="q1" value="b"> Passar o dia relaxando, lendo ou assistindo algo interessante.</label><br>
+      <label><input type="radio" name="q1" value="c"> Reunir amigos e criar memórias inesquecíveis.</label><br>
+      <label><input type="radio" name="q1" value="d"> Planejar e organizar algo produtivo para o futuro.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>2. Qual é a qualidade que mais valorizam em você?</strong></p>
+      <label><input type="radio" name="q2" value="a"> Minha criatividade e curiosidade.</label><br>
+      <label><input type="radio" name="q2" value="b"> Minha empatia e habilidade de ouvir.</label><br>
+      <label><input type="radio" name="q2" value="c"> Minha energia e carisma.</label><br>
+      <label><input type="radio" name="q2" value="d"> Minha determinação e foco.</label>
+    </div>
+
+    <div class="question">
+      <p><strong>3. Você está em um grupo de trabalho. Qual é o seu papel mais comum?</strong></p>
+      <label><input type="radio" name="q3" value="a"> O que traz ideias novas e resolve problemas criativamente.</label><br>
+      <label><input type="radio" name="q3" value="b"> Aquele que garante que todos estão bem e cooperando.</label><br>
+      <label><input type="radio" name="q3" value="c"> O motivador que inspira a equipe a dar o melhor.</label><br>
+      <label><input type="radio" name="q3" value="d"> O organizador que mantém tudo em ordem e nos trilhos.</label>
+    </div>
+
+    <button type="button" onclick="calculateResult()">Ver Resultado</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function calculateResult() {
+      const answers = {
+        a: 0,
+        b: 0,
+        c: 0,
+        d: 0,
+      };
+
+      // Obter respostas do formulário
+      const form = document.forms['quizForm'];
+      const totalQuestions = 3; // Número de perguntas
+
+      for (let i = 1; i <= totalQuestions; i++) {
+        const question = form[`q${i}`];
+        if (question.value) {
+          answers[question.value]++;
+        }
+      }
+
+      // Verificar qual resposta teve mais pontos
+      const maxAnswer = Object.keys(answers).reduce((a, b) =>
+        answers[a] > answers[b] ? a : b
+      );
+
+      // Mostrar resultado
+      const resultDiv = document.getElementById('result');
+      const results = {
+        a: "Seu arquétipo é o Explorador: curioso, criativo e amante de aventuras!",
+        b: "Seu arquétipo é o Cuidador: empático, sensível e sempre preocupado com os outros!",
+        c: "Seu arquétipo é o Líder: carismático, inspirador e cheio de energia!",
+        d: "Seu arquétipo é o Estrategista: focado, determinado e muito organizado!"
+      };
+
+      resultDiv.textContent = results[maxAnswer] || "Por favor, responda todas as perguntas!";
+    }
+  </script>
+
+</body>
+</html>
